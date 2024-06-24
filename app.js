@@ -6,14 +6,25 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
+const { sequelize } = require("./models");
 const app = express();
 
 app.set("port", process.env.PORT || 8001);
 
+sequelize
+  .sync()
+  .then(() => console.log("데이터 베이스 연결 성공"))
+  .catch((err) => console.error("연결 실패", err));
+// db연결
+
 app.use(morgan("dev"));
+
+// bdoy-parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 app.use(cookieParser(process.env.COOKIE_SECRET));
+
 app.use(
   session({
     resave: true,
