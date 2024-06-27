@@ -1,11 +1,11 @@
 const passport = require("passport");
-const localStrategy = require("passport-local").Strategy;
+const { Strategy: LocalStrategy } = require("passport-local");
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
 module.exports = () => {
   passport.use(
-    new localStrategy(
+    new LocalStrategy(
       {
         usernameField: "email", // req.body.email
         passwordField: "password", // req.body.password
@@ -31,6 +31,7 @@ module.exports = () => {
           done(e); // 서버 에러
         }
       }
-    )
+    ),
+    console.log("1")
   );
 };

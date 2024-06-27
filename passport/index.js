@@ -5,6 +5,7 @@ const User = require("../models/user");
 
 module.exports = () => {
   passport.serializeUser((user, done) => {
+    console.log(user.id);
     done(null, user.id);
   });
   passport.deserializeUser((id, done) => {
@@ -13,4 +14,5 @@ module.exports = () => {
       .catch((err) => console.log(err));
   });
   local();
+  kakao();
 };
